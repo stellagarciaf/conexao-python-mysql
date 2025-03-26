@@ -140,7 +140,7 @@ def cadastro_adocao():
 
     # Inserir a adoção na tabela Adocao
     query = """
-        INSERT INTO Adocao (id_animal, id_adotante, data_adocao, termo_assinado)
+        INSERT INTO Adocao (id_animal, id, data_adocao, termo_assinado)
         VALUES (%s, %s, %s, %s)
     """
     cursor.execute(query, dados_adocao)
@@ -154,13 +154,45 @@ def cadastro_adocao():
     flash("Adoção registrada com sucesso!")
     return redirect(url_for("home") + "#adocao")  # Redireciona para a seção de adoção
 
+@app.route("/cadastro_veterinario", methods=["POST"])
+def cadastro_veterinario():
+    crmv = request.form.get("crmv")
+    nome_veterinario = request.form.get("nome_veterinario")
+
+    dados = (crmv, nome_veterinario)
+
+    connect = connector.connect(
+        host="localhost",
+        database="ong",
+        user="root",
+        password="Myxboxone1."
+    )
+
+    cursor = connect.cursor()
+
+    query = """
+        INSERT INTO Veterinario (crmv, nome_veterinario)
+        VALUES (%s, %s)
+    """
+    cursor.execute(query, dados)
+
+    connect.commit()
+
+    cursor.close()
+    connect.close()
+
+    flash("Veterinário cadastrado com sucesso!")
+    return redirect(url_for("home") + "#veterinarios")
+
+
 @app.route("/cadastro_tratamento", methods=["POST"])
 def cadastro_tratamento():
     id_animal = request.form.get("id_animal")
     data_tratamento = request.form.get("data_tratamento")
     tipo_procedimento = request.form.get("tipo_procedimento")
+    crmv = request.form.get("crmv")  # Novo campo para armazenar o CRMV do veterinário responsável
 
-    dados_tratamento = (id_animal, data_tratamento, tipo_procedimento)
+    dados_tratamento = (id_animal, data_tratamento, tipo_procedimento, crmv)
 
     # Conectar ao banco de dados
     connect = connector.connect(
@@ -174,8 +206,8 @@ def cadastro_tratamento():
 
     # Inserir o tratamento na tabela Tratamento
     query = """
-        INSERT INTO Tratamento (id_animal, data_tratamento, tipo_procedimento)
-        VALUES (%s, %s, %s)
+        INSERT INTO Tratamento (id_animal, data_tratamento, tipo_procedimento, crmv)
+        VALUES (%s, %s, %s, %s)
     """
     cursor.execute(query, dados_tratamento)
 
@@ -186,7 +218,75 @@ def cadastro_tratamento():
     connect.close()
 
     flash("Tratamento registrado com sucesso!")
-    return redirect(url_for("home") + "#tratamento")  # Redireciona para a seção de tratamento
+    return redirect(url_for("home") + "#tratamento")
+
+
+@app.route("/cadastro_campanha", methods=["POST"])
+def cadastro_campanha():
+    tipo_campanha = request.form.get("tipo_campanha")
+    data_campanha = request.form.get("data_campanha")
+    local_campanha = request.form.get("local_campanha")
+    id_animal = request.form.get("id_animal")
+    
+    dados_campanha = (tipo_campanha, data_campanha, local_campanha, id_animal)
+    
+    # Conectar ao banco de dados
+    connect = connector.connect(
+        host="localhost",
+        database="ong",
+        user="root",
+        password="Myxboxone1."
+    )
+    
+    cursor = connect.cursor()
+    
+    # Inserir a campanha na tabela Campanha
+    query = """
+        INSERT INTO Campanha (tipo_campanha, data_campanha, local_campanha, id_animal)
+        VALUES (%s, %s, %s, %s)
+    """
+    cursor.execute(query, dados_campanha)
+    
+    # Commit para salvar no banco
+    connect.commit()
+    
+    cursor.close()
+    connect.close()
+    
+    flash("Campanha registrada com sucesso!")
+    return redirect(url_for("home") + "#campanha")  # Redireciona para a seção de campanhas
+
+@app.route("/cadastro_estoque", methods=["POST"])
+def cadastro_estoque():
+    nome_item = request.form.get("nome_item")
+    quantidade_item = request.form.get("quantidade_item")
+    id_tratamento = request.form.get("id_tratamento")
+
+    dados_estoque = (nome_item, quantidade_item, id_tratamento)
+
+    connect = connector.connect(
+        host="localhost",
+        database="ong",
+        user="root",
+        password="Myxboxone1."
+    )
+
+    cursor = connect.cursor()
+
+    query = """
+        INSERT INTO Estoque (nome_item, quantidade_item, id_tratamento)
+        VALUES (%s, %s, %s)
+    """
+    cursor.execute(query, dados_estoque)
+
+    connect.commit()
+
+    cursor.close()
+    connect.close()
+
+    flash("Item de estoque cadastrado com sucesso!")
+    return redirect(url_for("home") + "#estoque")  # Redireciona para a seção de estoque
+
 
 if __name__ == "__main__":
     app.run(debug=True)
