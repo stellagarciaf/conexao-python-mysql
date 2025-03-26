@@ -1,4 +1,3 @@
-/* Resetando margens e paddings */
 * {
     margin: 0;
     padding: 0;
@@ -6,155 +5,181 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background-color: #f4f7f6;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
     color: #333;
 }
 
+/* Cabeçalho */
 header {
-    background-color: #005f56;
-    color: #fff;
-    padding: 20px 0;
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
     text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-header h1 {
-    font-size: 2.5rem;
+.container-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.container-main .logo {
+    width: 100px;
+    height: auto;
+}
+
+.container-main .btn-cadastrar {
+    background-color: #ff9800;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.container-main .btn-cadastrar:hover {
+    background-color: #e68900;
+}
+
+/* Navegação */
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    background-color: #388E3C;
+    padding: 10px;
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 10px;
 }
 
 nav ul li a {
-    color: #fff;
+    color: white;
     text-decoration: none;
-    font-size: 1.1rem;
-    padding: 8px 15px;
+    font-weight: bold;
+    padding: 10px 15px;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 nav ul li a:hover {
-    background-color: #004944;
+    background-color: #2E7D32;
 }
 
-main {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 0 15px;
-}
-
-section {
-    margin-bottom: 40px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-section h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-form input, form button {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 1rem;
-}
-
-form input:focus, form button:focus {
-    outline: none;
-    border-color: #005f56;
-}
-
-form button {
-    background-color: #005f56;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-form button:hover {
-    background-color: #004944;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-table th, table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-table th {
-    background-color: #005f56;
-    color: #fff;
-    font-size: 1.1rem;
-}
-
-table tr:hover {
-    background-color: #f1f1f1;
-}
-
-footer {
-    background-color: #005f56;
-    color: #fff;
-    padding: 15px;
+/* Seções */
+.section {
+    display: none;
+    padding: 2rem;
+    margin: 1rem auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
     text-align: center;
-    margin-top: 30px;
 }
 
-footer p {
-    font-size: 1rem;
+.section.active {
+    display: block;
 }
 
-/* Estilos para inputs */
-input[type="text"], input[type="number"], input[type="date"], input[type="checkbox"] {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    transition: background-color 0.3s, border-color 0.3s;
+/* Flash Message */
+.flash-message {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 5px;
 }
 
-input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
-    background-color: #ffffff;
-    border-color: #005f56;
-}
-
-input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-
-label {
-    font-size: 1.1rem;
-    color: #333;
-    display: inline-block;
-    margin-bottom: 5px;
-}
-
-.container {
+/* Formulários */
+.container-input input,
+.container-button input {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.container-button input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.container-button input[type="submit"]:hover {
+    background-color: #388E3C;
+}
+
+/* Containers de itens */
+.resgate-container,
+.tratamento-container,
+.campanha-container,
+.adocao-container,
+.estoque-container,
+.veterinario-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.resgate-item,
+.tratamento-item,
+.campanha-item,
+.adocao-item,
+.estoque-item,
+.veterinario-item {
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 10px;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.resgate-item img,
+.adocao-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: white;
+    margin-top: 2rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .resgate-item,
+    .tratamento-item,
+    .campanha-item,
+    .adocao-item,
+    .estoque-item,
+    .veterinario-item {
+        width: 100%;
+    }
 }
